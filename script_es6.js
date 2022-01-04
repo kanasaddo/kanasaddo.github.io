@@ -85,9 +85,6 @@
         routeColors: ["#80C241"]
     });
 
-    //離脱確認
-    window.addEventListener("beforeunload", e => e.returnValue = "确定要离开此页面吗");
-
     //専用フォーマット
     const desig1 = {
         stringify(data){
