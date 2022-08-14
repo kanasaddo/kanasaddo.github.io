@@ -1,9 +1,9 @@
 (() => {
-    const FONT_JAPANESE = "'Noto Sans SC', sans-serif";
-    const FONT_HELVETICA = "'Noto Sans TC', 'Helvetica', sans-serif";
-    const FONT_FRUTIGER = "'Noto Sans TC', 'Frutiger', sans-serif";
-    const FONT_CHINESE = "'Noto Sans SC', sans-serif";
-    const FONT_KOREAN = "'Noto Sans SC', sans-serif";
+    const FONT_JAPANESE = "'Noto Sans JP', sans-serif";
+    const FONT_HELVETICA = "'Roboto', 'Helvetica', sans-serif";
+    const FONT_FRUTIGER = "'Roboto', 'Frutiger', sans-serif";
+    const FONT_SCHINESE = "'Noto Sans SC', sans-serif";
+    const FONT_TCHINESE = "'Noto Sans TC', sans-serif";
     const defaultData = () => ({
         signType: "jre-kanji",
         signBoard: {
@@ -19,8 +19,8 @@
                 kanji: "新宿",
                 english: "Shinjuku",
                 kana: "しんじゅく",
-                chinese: "新宿",
-                korean: "신주쿠"
+                schinese: "新宿",
+                tchinese: "新宿"
             },
             enableTlc: true,
             tlc: "SJK",
@@ -104,8 +104,8 @@
             rtn += strLength(sta.name.english);
             rtn += strLength(sta.name.kana);
             if(numbering){
-                rtn += strLength(sta.name.chinese);
-                rtn += strLength(sta.name.korean);
+                rtn += strLength(sta.name.schinese);
+                rtn += strLength(sta.name.tchinese);
                 rtn += sta.enableTlc? "1" + sta.tlc : "0";
                 rtn += stringifyNumberings(sta.numberings);
             }
@@ -184,8 +184,8 @@
             data.sta.name.english = parseLengthStr(current);
             data.sta.name.kana = parseLengthStr(current);
             if(numbering){
-                data.sta.name.chinese = parseLengthStr(current);
-                data.sta.name.korean = parseLengthStr(current);
+                data.sta.name.schinese = parseLengthStr(current);
+                data.sta.name.tchinese = parseLengthStr(current);
 
                 const tlc = Boolean(str[current++] - 0);
                 data.sta.enableTlc = tlc;
@@ -199,8 +199,8 @@
 
                 data.sta.numberings = parseNumberings(current);
             }else{
-                data.sta.chinese = "";
-                data.sta.korean = "";
+                data.sta.schinese = "";
+                data.sta.tchinese = "";
 
                 data.sta.enableTlc = false;
 
@@ -655,17 +655,17 @@
                 drawText({
                     x: hw + kanjiWidth / 2 + 65,
                     y: lineTop - 195,
-                    text: data.sta.name.chinese,
+                    text: data.sta.name.schinese,
                     size: 50,
-                    font: FONT_CHINESE,
+                    font: FONT_SCHINESE,
                     align: "left"
                 });
                 drawText({
                     x: hw + kanjiWidth / 2 + 65,
                     y: lineTop - 120,
-                    text: data.sta.name.korean,
+                    text: data.sta.name.tchinese,
                     size: 50,
-                    font: FONT_KOREAN,
+                    font: FONT_TCHINESE,
                     align: "left"
                 });
 
@@ -880,9 +880,7 @@
         data: () => Object.assign(defaultData(), {
             macrons: ["Ā", "Ē", "Ī", "Ō", "Ū", "ā", "ē", "ī", "ō", "ū"],
             fontLoad: {
-                japanese: false,
-                chinese: false,
-                korean: false
+                english: false
             },
             shareURL: "",
             blackList: [
@@ -946,21 +944,9 @@
             loadFont(lang){
                 const self = this;
                 const config = {
-                    japanese: {
-                        families: ["Noto Sans SC"],
-                        urls: ["https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@500&display=swap"]
-                    },
-                    chinese: {
-                        families: ["Noto Sans SC"],
-                        urls: ["https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@500&display=swap"]
-                    },
-                    korean: {
-                        families: ["Noto Sans SC"],
-                        urls: ["https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@500&display=swap"]
-                    },
                     english: {
-                        families: ["Noto Sans TC"],
-                        urls: ["https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap"]
+                        families: ["Roboto"],
+                        urls: ["https://fonts.googleapis.com/css2?family=Roboto"]
                     }
                 };
                 WebFont.load({
@@ -1011,11 +997,11 @@
             families: ["Open+Sans:700&text=0123456789MS", "Lato:700&text=ABDEFGHIJLNOPQRTUVWXYZ", "Cabin:700&text=CK"]
         },*/
         custom: {
-            families: ["Open Sans", "Lato", "Cabin"],
+            families: ["Noto Sans JP", "Noto Sans SC", "Noto Sans TC"],
             urls: [
-                "https://fonts.googleapis.com/css?family=Open+Sans:700&text=0123456789MS",
-                "https://fonts.googleapis.com/css?family=Lato:700&text=ABDEFGHIJLNOPQRTUVWXYZ",
-                "https://fonts.googleapis.com/css?family=Cabin:700&text=CK"
+                "https://fonts.googleapis.com/css2?family=Noto+Sans+JP",
+                "https://fonts.googleapis.com/css2?family=Noto+Sans+SC",
+                "https://fonts.googleapis.com/css2?family=Noto+Sans+TC"
             ]
         },
         active(){
