@@ -86,7 +86,7 @@
     });
 
     //専用フォーマット
-    const desig1 = {
+    const design = {
         stringify(data){
             //文字列化
             const strLength = str => str.length + ":" + str;
@@ -768,7 +768,7 @@
         $message.classList.remove("show");
 
         //保存
-        localStorage.setItem("lastSaved", LZString.compressToEncodedURIComponent(desig1.stringify(this)));
+        localStorage.setItem("lastSaved", LZString.compressToEncodedURIComponent(design.stringify(this)));
 
         //描画処理
         setTimeout(() => {
@@ -863,12 +863,12 @@
         mounted(){
             const lastSaved = localStorage.getItem("lastSaved");
             let openData;
-            if(location.search.match(/\?desig1=/)){
-                //URLパラメーターがdesig1フォーマットなら
-                openData = desig1.parse(LZString.decompressFromEncodedURIComponent(location.search.slice(8)));
+            if(location.search.match(/\?design=/)){
+                //URLパラメーターがdesignフォーマットなら
+                openData = design.parse(LZString.decompressFromEncodedURIComponent(location.search.slice(8)));
             }else if(lastSaved){
                 //URLパラメーターがなければ
-                openData = desig1.parse(LZString.decompressFromEncodedURIComponent(lastSaved));
+                openData = design.parse(LZString.decompressFromEncodedURIComponent(lastSaved));
             }
 
             if(openData){
@@ -978,7 +978,7 @@
             share_url(){
                 if(!this.$el.checkValidity()) return;
                 //保存
-                this.shareURL = location.protocol + "//" + location.host + location.pathname + "?desig1=" + LZString.compressToEncodedURIComponent(desig1.stringify(this));
+                this.shareURL = location.protocol + "//" + location.host + location.pathname + "?design=" + LZString.compressToEncodedURIComponent(design.stringify(this));
             },
             copy(text){
                 document.addEventListener("copy", e => {
